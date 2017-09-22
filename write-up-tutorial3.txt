@@ -1,0 +1,89 @@
+Luthfi Abdurrhaim
+1406557535
+---------
+write-up tutorial 3
+
+Membuat ​ ​​Service
+4. Implementasikan ​method ​selectStudent! ​Method ​ini menerima NPM mahasiswa dan
+mengembalikan ​ ​​object ​ ​​Student ​ ​dengan ​ ​NPM ​ ​tersebut. ​ ​Return ​ ​null ​ ​jika ​ ​tidak ​ ​ditemukan.
+- Method selectStudent telah diimplementasikan dan berhasil bisa dicek saat menjalankan method berikutnya, yaitu method view by NPM.
+Method selectStudent berisi kodingan yang melakukan looping dengan for terlebih dahulu, karena perlu student bertipe data list, lalu mengampil isi student dengan memanggil getter yang ada di dalam student, yaitu npm, name dan gpa.
+
+
+Membuat Controller dan fungsi add
+1. localhost:8080/student/add?npm=12345&name=chanek&gpa=3.43
+berhasil diakses, bukti screenshot ada pada file berhasil1.jpg
+2. localhost:8080/student/add?npm=12345&name=chanek
+- tidak berhasil, menampilkan whitelabel error page karena ada satu parameter yang tidak dimasukkan dalam link, yaitu gpa. Pada controller tertulis bahwa param gpa required=true, sehingga mewajibkan untuk ditulis pada link, jika tidak akan error. bukti screenshot error ada pada file error1.jpg
+
+
+
+Method view by NPM
+3.Jalankan ​ ​program ​ ​dan ​ ​buka
+localhost:8080/student/add?npm=12345&name=chanek&gpa=3.43 ​ ​lalu ​ ​buka
+localhost:8080/student/view?npm=12345,
+Pertanyaan ​ ​3​: ​ ​apakah ​ ​data ​ ​Student ​ ​tersebut ​ ​muncul? ​ ​Jika ​ ​tidak, ​ ​mengapa?
+- method view by npm dengan cara seperti ini berhasil dilakukan dan dapat dilihat pada screenshot berhasil2.jpg , hal ini berhasil dilakukan karena telah ditambahkan dengan url /add dengan parameter yang sesuai dibutuhkan, lalu diakses dengan melihat dari npm yang sesuai di add tadi.
+
+4.​ ​Coba ​ ​matikan ​ ​program ​ ​dan ​ ​jalankan ​ ​kembali ​ ​serta ​ ​buka
+localhost:8080/student/view?npm=12345
+Pertanyaan ​ ​4​: ​ ​apakah ​ ​data ​ ​Student ​ ​tersebut ​ ​muncul? ​ ​Jika ​ ​tidak, ​ ​mengapa?
+- data student tidak muncul setelah program dimatikan lalu jalankan lagi, karena belum melakukan perintah add pada url, sehingga tidak ada data yang disimpan maka saat langsung mengakses view data tidak akan muncul. bukti error ada pada screenshot dengan nama file error2.jpg
+
+5.​ ​Coba ​ ​tambahkan ​ ​data ​ ​Student ​ ​lainnya ​ ​dengan ​ ​NPM ​ ​yang ​ ​berbeda.
+- bukti berhasil ada pada screenshot dengan nama file berhasil3.jpg saat add berhasil dan berhasil4.jpg saat berhasil ditampilkan
+
+
+
+
+Method view All
+3.​ ​Jalankan ​ ​program ​ ​dan ​ ​buka
+localhost:8080/student/add?npm=12345&name=chanek&gpa=3.43 ​ ​lalu ​ ​buka
+localhost:8080/student/viewall,
+Pertanyaan ​ ​5​: ​ ​apakah ​ ​data ​ ​Student ​ ​tersebut ​ ​muncul?
+- ya, seluruh data students berhasil muncul, bukti ada pada file screenshot bernama berhasil5.jpg
+
+4.​ ​Coba ​ ​tambahkan ​ ​data ​ ​Student ​ ​lainnya ​ ​dengan ​ ​NPM ​ ​yang ​ ​berbeda, ​ ​lalu ​ ​buka
+localhost:8080/student/viewall,
+Pertanyaan ​ ​6​: ​ ​Apakah ​ ​semua ​ ​data ​ ​Student ​ ​muncul?
+- ya, semua data student muncul, bukti dapat dilihat pada screenshot file berhasil6.jpg
+
+
+
+Latihan
+1. Pada ​StudentController ​tambahkan sebuah ​method view ​Student dengan menggunakan
+Path Variable ​. Misalnya, Anda ingin memasukkan data seorang Student yang memiliki
+NPM 14769, untuk melihat data yang baru dimasukkan tersebut dapat mengakses halaman
+localhost:8080/student/view/14769.
+Jika nomor NPM tidak diberikan atau tidak ditemukan kembalikan halaman ​error ​yang berisi
+informasi ​ ​bahwa ​ ​nomor ​ ​NPM ​ ​kosong ​ ​atau ​ ​tidak ​ ​ditemukan.
+- tahapan yang dilakukan ialah dengan mengimplementasikan kodingan pada class StudentController, menambahkan method viewByPath, pada method tersebut diterapkan req mapping dua value, dibutuhkan dua karena untuk menangkap yang tidak memberikan value npm dan yang memberikan value npm. 
+lalu, npm pada pathvariable bertipe data Optional<String> karena untuk mengecek apakah valuenya ada atau tidak dengan method isPresent(), sehingga dapat melakukan return viewnull saat tidak ada.
+jika student ada, maka variable student dapat diakses pada halaman view.html dengan variable student. jika student tidak ada, maka akan viewnotfound, dan jika tidak ada inputan npm maka viewempty.
+Bukti berhasilnya latihan nomor 1 ini ada pada screenshot file berhasil7.jpg , berhasil8.jpg, berhasil9.jpg dan berhasil10.jpg
+
+
+
+2. Tambahkan fitur untuk melakukan ​delete ​Student berdasarkan NPM. Misalnya, setelah
+melakukan ​add ​Student pada soal nomor 1, cobalah untuk melakukan ​delete ​data tersebut
+dengan mengakses halaman ​localhost:8080/student/delete/14769. ​Tampilkan sebuah
+halaman ​ ​yang ​ ​memberikan ​ ​informasi ​ ​bahwa ​ ​data ​ ​tersebut ​ ​telah ​ ​berhasil ​ ​dihapus.
+Jika nomor NPM tidak diberikan atau tidak ditemukan kembalikan halaman ​error ​yang berisi
+informasi ​ ​bahwa ​ ​nomor ​ ​NPM ​ ​kosong ​ ​atau ​ ​tidak ​ ​ditemukan ​ ​dan ​ ​proses ​ ​​delete ​ ​​dibatalkan.
+- tahapan yang dilakukan dalam pengimplementasian fitur delete ini ialah diawalin dengan membuat method delete pada class StudentController, lalu membuat req mapping dengan dua buah value, yaitu /student/delete dan /student/delete/{npm} , value dibuat dua agar dapat menangkap url tanpa npm dan me-return deletenull. Lalu, path variable bertipe Optional<String> agar dapat mengecek apakah ada value npm yang dipanggil atau tidak, sehingga dapat dicek dengan method isPresent(), jika tidak ada akan me-return deletenull. Lalu, perintah men-delete nya dilakukan dengan cara, memanggil method deleteStudent pada studentservice berdasarkan npm-nya.
+bukti keberhasilannya latihan nomor 2 ini ada pada screenshot file berhasil11.jpg , berhasil12.jpg dan berhasil13.jpg
+
+
+
+File ​ ​write-up ​ ​berisi ​ ​penjelasan ​ ​apa ​ ​yang ​ ​Anda ​ ​pelajari ​ ​pada ​ ​tutorial ​ ​kali ​ ​ini, ​ ​yaitu:
+a. ​ ​Ringkasan ​ ​dari ​ ​materi ​ ​yang ​ ​Anda ​ ​telah ​ ​pelajari ​ ​pada ​ ​tutorial ​ ​kali ​ ​ini
+- ringkasan materi yang dipelajari kali ini yaitu, semakin mengetahui tentang penggunaan service pada springboot, menerapkan controller yang terintegrasi pada service, bisa menerapkan fungsi add yang terintegrasi pada service dan model, lalu dapat melakukan retrieve data pada halaman web dengan menggunakan suatu parameter yaitu disini adalah npm ataupun view all data pada suatu model
+
+b. ​ ​Hasil ​ ​jawaban ​ ​dari ​ ​setiap ​ ​poin ​ ​pada ​ ​bagian ​ ​tutorial ​ ​(dapat ​ ​didukung ​ ​dengan screenshot)
+- screenshot sudah ada pada folder pendukung
+
+c. ​ ​Method ​ ​selectStudent ​ ​yang ​ ​Anda ​ ​implementasikan
+- method selectStudent telah diterapkan dan telah dijelaskan sebelumnya
+
+d. ​ ​Penjelasan ​ ​fitur ​ ​​delete ​ ​​yang ​ ​Anda ​ ​buat ​ ​pada ​ ​bagian ​ ​latihan
+- sudah dibuat
